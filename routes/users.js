@@ -25,14 +25,14 @@ async function login(req, res, next) {
 
 async function register(req, res, next) {
   try {
-    const serviceResponse = await adapter.post(req.path,
-      {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        subscriptions: req.body.subscriptions,
-        subscriptionTime: req.body.subscriptionTime,
-      });
+    const serviceResponse = await adapter.post(req.path, req.body);
+    // {
+    //  username: req.body.username,
+    //  password: req.body.password,
+    // email: req.body.email,
+    // subscriptions: req.body.subscriptions,
+    // subscriptionTime: req.body.subscriptionTime,
+    // });
 
     if (serviceResponse.data.registered !== true) {
       res.status(500).send('Registration failed.');
