@@ -5,12 +5,12 @@ require('dotenv').config();
 const { SECRET } = process.env;
 
 function authorize(req, res, next) {
-  if (!req.headers.authorization) {
+  if (!req.headers['x-jwt-token']) {
     res.status(401).send('Unathorized');
     return;
   }
   try {
-    jwt.verify(req.headers.authorization, SECRET);
+    jwt.verify(req.headers['x-jwt-token'], SECRET);
     next();
   } catch (err) {
     res.status(403).send('Forbidden');
